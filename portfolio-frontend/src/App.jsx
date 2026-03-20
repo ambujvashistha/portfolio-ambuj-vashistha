@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import './App.css'
 import InfiniteMenu from './components/infiniteMenu'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   
 
@@ -36,13 +34,8 @@ function App() {
 
   return (
     <>
-      <div>
+      <div style={{backgroundColor:"black"}}>
         <InfiniteMenu items={items} />
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
       </div>
     </>
   );
