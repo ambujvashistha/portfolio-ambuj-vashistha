@@ -1,6 +1,6 @@
 import './App.css'
 import InfiniteMenu from './components/infiniteMenu'
-
+import YoutubeFeed from './pages/YoutubeFeed';
 function App() {
 
   
@@ -36,6 +36,7 @@ function App() {
     <>
       <div style={{backgroundColor:"black"}}>
         <InfiniteMenu items={items} />
+        <YoutubeFeed/>
       </div>
     </>
   );
