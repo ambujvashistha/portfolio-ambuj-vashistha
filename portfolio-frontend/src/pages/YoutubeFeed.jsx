@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import InfiniteMenu from "../components/infiniteMenu";
 
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const CHANNEL_ID = "UCGIxGFeB6jbl5CEDqyU2axg";
@@ -16,11 +17,12 @@ export default function YoutubeFeed() {
       const vids = data.items.map((item) => ({
         id: item.id.videoId,
         title: item.snippet.title,
-        thumbnail: item.snippet.thumbnails.high.url,
+        image: item.snippet.thumbnails.high.url,
         link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
       }));
       console.log(data)
     //   console.log(API_KEY);
+    console.log(vids)
       setVideos(vids);
     }
 
@@ -28,14 +30,6 @@ export default function YoutubeFeed() {
   }, []);
 
   return (
-    <div className="grid">
-      {videos.map((v) => (
-        <div key={v.id} className="card">
-          <img src={v.thumbnail} />
-          <p style={{ color: "white" }}>{v.title}</p>
-          <p style={{ color: "white" }}>{v.link}</p>
-        </div>
-      ))}
-    </div>
+    <InfiniteMenu items={videos}/>
   );
 }
