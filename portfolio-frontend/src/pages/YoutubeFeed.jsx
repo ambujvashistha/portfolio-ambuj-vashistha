@@ -9,7 +9,7 @@ export default function YoutubeFeed() {
   useEffect(() => {
     async function fetchVideos() {
       const res = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&type=video`,
+        `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20&type=video`,
       );
       const data = await res.json();
 
@@ -17,6 +17,7 @@ export default function YoutubeFeed() {
         id: item.id.videoId,
         title: item.snippet.title,
         thumbnail: item.snippet.thumbnails.high.url,
+        link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
       }));
       console.log(data)
     //   console.log(API_KEY);
@@ -31,7 +32,8 @@ export default function YoutubeFeed() {
       {videos.map((v) => (
         <div key={v.id} className="card">
           <img src={v.thumbnail} />
-          <p style={{color:"white"}}>{v.title}</p>
+          <p style={{ color: "white" }}>{v.title}</p>
+          <p style={{ color: "white" }}>{v.link}</p>
         </div>
       ))}
     </div>
