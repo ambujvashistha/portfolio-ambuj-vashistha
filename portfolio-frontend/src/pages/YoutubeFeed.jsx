@@ -30,6 +30,7 @@ export default function YoutubeFeed() {
   }, []);
 
   return (
-    <InfiniteMenu items={videos}/>
+      <InfiniteMenu items={videos} number={3} />
+   
   );
 }
