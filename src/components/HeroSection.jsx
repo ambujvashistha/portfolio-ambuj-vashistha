@@ -12,7 +12,9 @@ export default function HeroSection({ bullets }) {
         </p>
         <h1>
           <span className="hero-name-first">Ambuj</span>
-          <span>Vashistha</span>
+          <span className="hero-name-pencil-wrap">
+            <span className="hero-name-pencil">Vashistha</span>
+          </span>
         </h1>
         <div className="hero-underline" aria-hidden="true">
           <img className="hero-stroke hero-stroke-red" src={underlineRed} alt="" />

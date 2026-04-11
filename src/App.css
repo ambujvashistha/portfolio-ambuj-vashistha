@@ -19,13 +19,13 @@
 .page-noise-left {
   top: -10rem;
   left: -8rem;
-  background: rgba(222, 103, 76, 0.18);
+  background: rgba(241, 77, 68, 0.2);
 }
 
 .page-noise-right {
   right: -10rem;
   bottom: -10rem;
-  background: rgba(96, 132, 204, 0.2);
+  background: rgba(65, 128, 238, 0.22);
 }
 
 .notebook-shell {
@@ -122,6 +122,7 @@
   line-height: 1.1;
   letter-spacing: 0.02em;
   transform: rotate(-1.4deg);
+  color: rgba(68, 101, 170, 0.84);
 }
 
 .hero-copy h1 {
@@ -141,7 +142,27 @@
 }
 
 .hero-copy h1 .hero-name-first {
-  color: #436eb6;
+  color: #3f7ef1;
+}
+
+.hero-name-pencil-wrap {
+  display: inline-block;
+  overflow: hidden;
+  padding-right: 0.08em;
+}
+
+.hero-name-pencil {
+  display: inline-block;
+  font-family: "Bradley Hand", "Segoe Print", "Snell Roundhand", cursive;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #1e2430;
+  transform: translateY(0.04em) rotate(-1.6deg);
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  animation:
+    pencil-write 1.35s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards,
+    pencil-float 4.8s ease-in-out 1.6s infinite;
 }
 
 .hero-underline {
@@ -202,9 +223,9 @@
 }
 
 .primary-action {
-  background: linear-gradient(135deg, #d36b57, #bf4e4e);
+  background: linear-gradient(135deg, #f05f58, #d93d53);
   color: #fffaf7;
-  box-shadow: 0 20px 36px rgba(181, 93, 68, 0.18);
+  box-shadow: 0 20px 36px rgba(217, 61, 83, 0.2);
 }
 
 .secondary-action {
@@ -293,7 +314,7 @@
   top: 3rem;
   left: 50%;
   transform: translateX(-50%);
-  border-color: rgba(84, 117, 184, 0.22);
+  border-color: rgba(63, 126, 241, 0.26);
 }
 
 .sketch.head {
@@ -391,7 +412,7 @@
   font-size: 0.82rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #b24f56;
+  color: #d64959;
 }
 
 .section-about {
@@ -454,7 +475,7 @@
   margin: 0;
   font-size: 0.86rem;
   letter-spacing: 0.18em;
-  color: rgba(92, 124, 177, 0.95);
+  color: rgba(63, 126, 241, 0.95);
 }
 
 .note-list,
@@ -497,7 +518,7 @@
   height: 1.25rem;
   opacity: 0.6;
   background:
-    linear-gradient(90deg, rgba(198, 70, 54, 0.18), rgba(70, 111, 189, 0.12)),
+    linear-gradient(90deg, rgba(217, 73, 89, 0.2), rgba(63, 126, 241, 0.14)),
     linear-gradient(135deg, transparent 0.4rem, rgba(124, 101, 84, 0.09) 0.5rem, transparent 0.7rem);
   background-size: 100% 100%, 1rem 100%;
 }
@@ -565,6 +586,32 @@
   to {
     transform: rotate(var(--rotation, 0deg)) scaleX(1);
     opacity: 1;
+  }
+}
+
+@keyframes pencil-write {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    filter: blur(1.5px);
+  }
+  20% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pencil-float {
+  0%,
+  100% {
+    transform: translateY(0.04em) rotate(-1.6deg);
+  }
+  50% {
+    transform: translateY(0) rotate(-1.1deg);
   }
 }
 
