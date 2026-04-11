@@ -42,11 +42,15 @@ function App() {
             <div className="hero-copy starter-card">
               <img className="tape-strip tape-strip-copy" src={tapeStrip} alt="" aria-hidden="true" />
               <p className="eyebrow">Developer</p>
-              <p className="hero-kicker">Frontend developer crafting thoughtful digital experiences.</p>
+              <p className="hero-kicker handwritten-line">thoughts, sketches, and shipped interfaces</p>
               <h1>
-                Ambuj
+                <span className="hero-name-first">Ambuj</span>
                 <span>Vashistha</span>
               </h1>
+              <div className="hero-underline" aria-hidden="true">
+                <span className="hero-underline-red" />
+                <span className="hero-underline-blue" />
+              </div>
               <p className="hero-summary">
                 I design and build interfaces that feel clear, personal, and
                 memorable, with an eye for motion, rhythm, and detail.
