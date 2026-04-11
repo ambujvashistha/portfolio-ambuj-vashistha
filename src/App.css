@@ -1,0 +1,36 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.starter-card {
+  width: min(38rem, 100%);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 252, 245, 0.92);
+  border: 1px solid rgba(61, 52, 46, 0.12);
+  box-shadow: 0 24px 60px rgba(42, 30, 24, 0.12);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: #9b5c42;
+}
+
+.starter-card h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 0.95;
+}
+
+.starter-card p:last-child {
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #3f3834;
+}
