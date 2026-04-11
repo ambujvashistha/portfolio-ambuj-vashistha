@@ -2,8 +2,9 @@ import './App.css'
 import pencilDivider from './assets/pencil-divider.svg'
 import ContentSections from './components/ContentSections'
 import HeroSection from './components/HeroSection'
+import ReelSection from './components/ReelSection'
 import SiteNav from './components/SiteNav'
-import { heroBullets, navItems, sections } from './data/portfolioContent'
+import { heroBullets, navItems, reelItems, sections } from './data/portfolioContent'
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <div className="divider-wrap" aria-hidden="true">
             <img className="pencil-divider" src={pencilDivider} alt="" />
           </div>
+
+          <ReelSection items={reelItems} />
 
           <ContentSections sections={sections} />
 

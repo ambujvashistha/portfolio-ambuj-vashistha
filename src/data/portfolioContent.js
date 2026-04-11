@@ -72,3 +72,34 @@ export const sections = [
     },
   },
 ]
+
+export const reelItems = [
+  {
+    index: '01',
+    tag: 'Notebook Reel',
+    title: 'Immersive portfolio system',
+    body: 'A cinematic notebook interface built around scroll choreography, tactile layering, and stronger visual identity.',
+    accent: 'reel-card-blue',
+  },
+  {
+    index: '02',
+    tag: 'UI Build',
+    title: 'Frontend product build',
+    body: 'Responsive product UI work focused on clarity, interaction rhythm, and making complex layouts feel easy to read.',
+    accent: 'reel-card-red',
+  },
+  {
+    index: '03',
+    tag: 'Experiments',
+    title: 'Creative web experiments',
+    body: 'Small interaction studies exploring motion, reveal systems, and calmer ways to make the web feel alive.',
+    accent: 'reel-card-ink',
+  },
+  {
+    index: '04',
+    tag: 'Next World',
+    title: 'Editor side, coming later',
+    body: 'A future mirrored experience where the visual rhythm shifts into storyboards, reels, and motion-first composition.',
+    accent: 'reel-card-blue',
+  },
+]
