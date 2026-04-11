@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 function ProjectList({ projects }) {
   return (
     <div className="project-list">
@@ -25,10 +27,64 @@ function BulletList({ items, className }) {
 }
 
 export default function ContentSections({ sections }) {
+  const containerRef = useRef(null)
+  const [activeIds, setActiveIds] = useState([])
+
+  useEffect(() => {
+    const node = containerRef.current
+    if (!node) return
+
+    const items = Array.from(node.querySelectorAll('.content-card'))
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setActiveIds((current) => {
+          const next = new Set(current)
+
+          entries.forEach((entry) => {
+            const id = entry.target.getAttribute('id')
+            if (!id) return
+
+            if (entry.isIntersecting) {
+              next.add(id)
+            } else {
+              next.delete(id)
+            }
+          })
+
+          return Array.from(next)
+        })
+      },
+      {
+        threshold: [0.16, 0.24, 0.38],
+        rootMargin: '0px 0px -12% 0px',
+      }
+    )
+
+    items.forEach((item) => observer.observe(item))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className="content-grid" aria-label="Portfolio sections">
+    <section className="content-grid" aria-label="Portfolio sections" ref={containerRef}>
       {sections.map((section) => (
-        <article className={`content-card ${section.className}`} id={section.id} key={section.id}>
+        <article
+          className={`content-card ${section.className} ${
+            activeIds.includes(section.id) ? 'content-card-active' : ''
+          }`}
+          id={section.id}
+          key={section.id}
+          style={{
+            '--boundary-delay': `${120 + sections.indexOf(section) * 55}ms`,
+            '--boundary-duration': `${520 + (sections.indexOf(section) % 3) * 110}ms`,
+          }}
+        >
+          <div className="content-card-boundary" aria-hidden="true">
+            <span className="boundary-stroke boundary-stroke-top" />
+            <span className="boundary-stroke boundary-stroke-side" />
+            <span className="boundary-scribble boundary-scribble-red" />
+            <span className="boundary-scribble boundary-scribble-blue" />
+          </div>
           <p className="section-tag">{section.tag}</p>
           <h2>{section.title}</h2>
 

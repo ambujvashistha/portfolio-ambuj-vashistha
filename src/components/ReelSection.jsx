@@ -44,11 +44,16 @@ export default function ReelSection({ items }) {
     }
   }, [])
 
-  const translate = `${progress * -44}%`
+  const translate = `${progress * -58}%`
   const rotation = `${-2 + progress * 3.5}deg`
+  const reelActive = progress > 0.03 && progress <= 1
 
   return (
-    <section className="reel-section" ref={sectionRef} aria-label="Project reel">
+    <section
+      className={`reel-section ${reelActive ? 'reel-section-active' : ''}`}
+      ref={sectionRef}
+      aria-label="Project reel"
+    >
       <div className="reel-stage">
         <div className="reel-copy">
           <p className="section-tag">Reel</p>
@@ -61,6 +66,12 @@ export default function ReelSection({ items }) {
 
         <div className="reel-window">
           <div className="reel-window-top" aria-hidden="true" />
+          <div className="reel-window-boundary" aria-hidden="true">
+            <span className="reel-boundary reel-boundary-left" />
+            <span className="reel-boundary reel-boundary-bottom" />
+            <span className="reel-boundary-scribble reel-boundary-scribble-red" />
+            <span className="reel-boundary-scribble reel-boundary-scribble-blue" />
+          </div>
           <div
             className="reel-track"
             style={{ transform: `translate3d(${translate}, 0, 0) rotate(${rotation})` }}
