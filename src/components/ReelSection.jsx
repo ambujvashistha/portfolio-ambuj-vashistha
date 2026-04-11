@@ -18,7 +18,7 @@ function ReelCard({ item }) {
 
 export default function ReelSection({ items }) {
   const sectionRef = useRef(null)
-  const [progress, setProgress] = useState(0)
+  const [transformData, setTransformData] = useState({ dx: '100vw', progress: 0 })
 
   useEffect(() => {
     const updateProgress = () => {
@@ -27,11 +27,26 @@ export default function ReelSection({ items }) {
 
       const rect = node.getBoundingClientRect()
       const viewportHeight = window.innerHeight
-      const total = rect.height - viewportHeight
-      const traveled = Math.min(Math.max(-rect.top, 0), total > 0 ? total : 0)
+      const total = rect.height + viewportHeight
+      const traveled = Math.min(Math.max(viewportHeight - rect.top, 0), total > 0 ? total : 0)
       const next = total > 0 ? traveled / total : 0
 
-      setProgress(next)
+      // Calculate absolute dynamic translation
+      const stickyThreshold = viewportHeight
+      let dx = '0px'
+
+      if (traveled <= stickyThreshold) {
+        // Entering phase: Move from 100vw to 0vw
+        const ratio = traveled > 0 ? traveled / stickyThreshold : 0
+        dx = `${100 - ratio * 100}vw`
+      } else {
+        // Sticky phase: Move from 0% to -100% track width
+        const stickyTraveled = traveled - stickyThreshold
+        const ratio = stickyTraveled / rect.height
+        dx = `${Math.max(-100, -ratio * 100)}%`
+      }
+
+      setTransformData({ dx, progress: next })
     }
 
     updateProgress()
@@ -44,7 +59,8 @@ export default function ReelSection({ items }) {
     }
   }, [])
 
-  const translate = `${progress * -58}%`
+  const { dx, progress } = transformData
+  const translate = dx
   const rotation = `${-2 + progress * 3.5}deg`
   const reelActive = progress > 0.03 && progress <= 1
 
