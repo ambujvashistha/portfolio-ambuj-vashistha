@@ -895,7 +895,7 @@
   transition-delay: 0ms;
 }
 
-.content-card > p:last-of-type {
+.content-card>p:last-of-type {
   margin: 0.95rem 0 0;
   color: rgba(52, 59, 73, 0.8);
   line-height: 1.8;
@@ -1092,6 +1092,7 @@
     transform: rotate(var(--rotation, 0deg)) scaleX(0);
     opacity: 0.4;
   }
+
   to {
     transform: rotate(var(--rotation, 0deg)) scaleX(1);
     opacity: 1;
@@ -1104,9 +1105,11 @@
     clip-path: inset(0 100% 0 0);
     filter: blur(1.5px);
   }
+
   20% {
     opacity: 0.55;
   }
+
   100% {
     opacity: 1;
     clip-path: inset(0 0 0 0);
@@ -1115,10 +1118,12 @@
 }
 
 @keyframes pencil-float {
+
   0%,
   100% {
     transform: translateY(0.04em) rotate(-1.6deg);
   }
+
   50% {
     transform: translateY(0) rotate(-1.1deg);
   }

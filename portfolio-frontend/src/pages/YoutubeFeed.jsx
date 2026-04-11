@@ -19,6 +19,7 @@ export default function YoutubeFeed() {
         title: item.snippet.title,
         image: item.snippet.thumbnails.high.url,
         link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        // link: `https://www.youtube.com/embed/${item.id.videoId}`,
       }));
       console.log(data)
     //   console.log(API_KEY);

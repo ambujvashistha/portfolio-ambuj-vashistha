@@ -1,6 +1,7 @@
 import tapeStrip from '../assets/tape-strip.svg'
 import underlineBlue from '../assets/underline-blue.svg'
 import underlineRed from '../assets/underline-red.svg'
+import Magnetic from './Magnetic'
 
 export default function HeroSection({ bullets }) {
   return (
@@ -26,12 +27,16 @@ export default function HeroSection({ bullets }) {
         </p>
 
         <div className="hero-actions">
-          <a className="primary-action" href="#projects">
-            View Projects
-          </a>
-          <a className="secondary-action" href="#about">
-            Read Notes
-          </a>
+          <Magnetic strength={0.4}>
+            <a className="primary-action" href="#projects">
+              View Projects
+            </a>
+          </Magnetic>
+          <Magnetic strength={0.2}>
+            <a className="secondary-action" href="#about">
+              Read Notes
+            </a>
+          </Magnetic>
         </div>
 
         <ul className="hero-bullets">

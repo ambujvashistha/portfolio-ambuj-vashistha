@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function ProjectList({ projects }) {
   return (
@@ -68,10 +68,10 @@ export default function ContentSections({ sections }) {
   return (
     <section className="content-grid" aria-label="Portfolio sections" ref={containerRef}>
       {sections.map((section) => (
+        <React.Fragment key={section.id}>
         <article
-          className={`content-card ${section.className} ${
-            activeIds.includes(section.id) ? 'content-card-active' : ''
-          }`}
+          className={`content-card ${section.className} ${activeIds.includes(section.id) ? 'content-card-active' : ''
+            }`}
           id={section.id}
           key={section.id}
           style={{
@@ -102,6 +102,7 @@ export default function ContentSections({ sections }) {
             </a>
           ) : null}
         </article>
+      </React.Fragment>
       ))}
     </section>
   )
