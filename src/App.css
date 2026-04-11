@@ -1,17 +1,66 @@
 .app-shell {
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.page-noise {
+  position: fixed;
+  inset: auto;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.45;
+}
+
+.page-noise-left {
+  top: -8rem;
+  left: -8rem;
+  background: rgba(226, 121, 60, 0.25);
+}
+
+.page-noise-right {
+  right: -10rem;
+  bottom: -10rem;
+  background: rgba(103, 133, 192, 0.2);
+}
+
+.notebook-shell {
+  position: relative;
+  min-height: calc(100vh - clamp(2.5rem, 6vw, 5rem));
+  border-radius: 2rem;
+  border: 1px solid rgba(88, 71, 58, 0.12);
+  background:
+    linear-gradient(rgba(89, 100, 123, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(89, 100, 123, 0.1) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 254, 251, 0.96), rgba(248, 242, 233, 0.98));
+  background-size: 3rem 3rem, 3rem 3rem, 100% 100%;
+  box-shadow:
+    0 32px 70px rgba(78, 57, 45, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.notebook-spread {
+  min-height: calc(100vh - clamp(2.5rem, 6vw, 5rem));
   display: grid;
   place-items: center;
-  padding: 2rem;
+  padding: clamp(2rem, 5vw, 4rem);
+  position: relative;
 }
 
 .starter-card {
-  width: min(38rem, 100%);
-  padding: 2rem;
-  border-radius: 1.5rem;
-  background: rgba(255, 252, 245, 0.92);
+  width: min(40rem, 100%);
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: 1.75rem;
+  background: rgba(255, 251, 245, 0.78);
   border: 1px solid rgba(61, 52, 46, 0.12);
-  box-shadow: 0 24px 60px rgba(42, 30, 24, 0.12);
+  box-shadow:
+    0 24px 60px rgba(42, 30, 24, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+  backdrop-filter: blur(10px);
 }
 
 .eyebrow {
@@ -33,4 +82,91 @@
   font-size: 1.05rem;
   line-height: 1.7;
   color: #3f3834;
+}
+
+.paper-tear {
+  position: absolute;
+  left: 8%;
+  width: 24%;
+  height: 1.25rem;
+  opacity: 0.6;
+  background:
+    linear-gradient(90deg, rgba(198, 70, 54, 0.18), rgba(217, 169, 66, 0.1)),
+    linear-gradient(135deg, transparent 0.4rem, rgba(124, 101, 84, 0.09) 0.5rem, transparent 0.7rem);
+  background-size: 100% 100%, 1rem 100%;
+}
+
+.paper-tear-top {
+  top: 2rem;
+  border-radius: 999px;
+}
+
+.paper-tear-bottom {
+  bottom: 2rem;
+  left: auto;
+  right: 12%;
+  width: 18%;
+  opacity: 0.45;
+}
+
+.scribble-cluster {
+  position: absolute;
+  display: grid;
+  gap: 1rem;
+  width: 9rem;
+}
+
+.scribble-cluster span {
+  display: block;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: rgba(42, 37, 33, 0.18);
+  transform-origin: left center;
+}
+
+.scribble-cluster span:nth-child(1) {
+  width: 100%;
+  transform: rotate(-8deg);
+}
+
+.scribble-cluster span:nth-child(2) {
+  width: 72%;
+  background: rgba(192, 92, 42, 0.24);
+  transform: rotate(6deg);
+}
+
+.scribble-cluster span:nth-child(3) {
+  width: 88%;
+  background: rgba(82, 111, 176, 0.18);
+  transform: rotate(-3deg);
+}
+
+.scribble-cluster-left {
+  left: clamp(1.5rem, 4vw, 4rem);
+  top: clamp(2rem, 10vw, 7rem);
+}
+
+.scribble-cluster-right {
+  right: clamp(1.5rem, 4vw, 4rem);
+  bottom: clamp(2rem, 10vw, 7rem);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .notebook-shell,
+  .notebook-spread {
+    min-height: calc(100vh - 2rem);
+  }
+
+  .scribble-cluster {
+    width: 5.5rem;
+    gap: 0.6rem;
+  }
+
+  .paper-tear {
+    width: 36%;
+  }
 }
