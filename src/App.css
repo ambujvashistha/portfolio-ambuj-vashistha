@@ -41,18 +41,6 @@
   position: relative;
 }
 
-.starter-card {
-  width: min(40rem, 100%);
-  padding: clamp(2rem, 5vw, 3rem);
-  border-radius: 1.75rem;
-  background: rgba(255, 255, 252, 0.62);
-  border: 1px solid rgba(94, 102, 124, 0.11);
-  box-shadow:
-    0 26px 70px rgba(52, 63, 88, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.55) inset;
-  backdrop-filter: blur(14px);
-}
-
 .site-nav {
   display: flex;
   align-items: center;
@@ -64,10 +52,10 @@
   margin-top: 1rem;
   padding: 0.85rem 1rem;
   border-radius: 999px;
-  background: rgba(252, 252, 251, 0.72);
-  border: 1px solid rgba(95, 105, 124, 0.12);
+  background: rgba(249, 251, 255, 0.78);
+  border: 1px solid rgba(95, 105, 124, 0.14);
   box-shadow:
-    0 16px 40px rgba(57, 69, 96, 0.08),
+    0 16px 40px rgba(57, 69, 96, 0.06),
     0 0 0 1px rgba(255, 255, 255, 0.42) inset;
   backdrop-filter: blur(12px);
 }
@@ -113,12 +101,14 @@
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
   align-items: center;
   gap: clamp(2rem, 6vw, 4rem);
-  padding: clamp(3.8rem, 9vw, 6.8rem) 0 2.2rem;
+  padding: clamp(4rem, 10vw, 7rem) 0 2.4rem;
 }
 
 .hero-copy {
   justify-self: start;
   position: relative;
+  width: min(44rem, 100%);
+  padding: 0.5rem 0 0.5rem 0.35rem;
 }
 
 .hero-kicker {
@@ -127,70 +117,68 @@
 }
 
 .handwritten-line {
-  font-family: "Snell Roundhand", "Segoe Print", "Bradley Hand", cursive;
-  font-size: 1.35rem;
+  font-family: "Bradley Hand", "Segoe Print", "Snell Roundhand", cursive;
+  font-size: 1.5rem;
   line-height: 1.1;
   letter-spacing: 0.02em;
-  transform: rotate(-1.8deg);
+  transform: rotate(-1.4deg);
 }
 
 .hero-copy h1 {
   margin: 0;
   display: grid;
   gap: 0.02em;
-  font-size: clamp(4.1rem, 12vw, 8rem);
+  font-size: clamp(4.5rem, 13vw, 8.8rem);
   line-height: 0.86;
-  color: #161a21;
+  color: #11151d;
+  text-shadow:
+    0.02em 0.02em 0 rgba(255, 255, 255, 0.45),
+    0.03em 0.05em 0 rgba(72, 92, 140, 0.08);
 }
 
 .hero-copy h1 span {
-  color: #1a1d24;
+  color: #151922;
 }
 
 .hero-copy h1 .hero-name-first {
-  color: #315a9b;
+  color: #436eb6;
 }
 
 .hero-underline {
   position: relative;
-  width: min(24rem, 88%);
-  height: 1.7rem;
-  margin-top: 0.45rem;
+  width: min(28rem, 92%);
+  height: 2rem;
+  margin-top: 0.3rem;
 }
 
-.hero-underline span {
+.hero-stroke {
   position: absolute;
-  left: 0;
   display: block;
-  border-radius: 999px;
+  left: 0;
   transform-origin: left center;
   animation: underline-draw 2.4s ease forwards;
 }
 
-.hero-underline-red {
-  --rotation: -1.7deg;
-  top: 0.45rem;
+.hero-stroke-red {
+  --rotation: -2deg;
+  top: 0.35rem;
   width: 100%;
-  height: 0.32rem;
-  background: rgba(201, 59, 57, 0.84);
-  transform: rotate(-1.7deg) scaleX(0);
+  transform: rotate(-2deg) scaleX(0);
 }
 
-.hero-underline-blue {
-  --rotation: 1.6deg;
-  top: 0.9rem;
-  left: 1.8rem;
-  width: 72%;
-  height: 0.18rem;
-  background: rgba(70, 111, 189, 0.5);
-  transform: rotate(1.6deg) scaleX(0);
+.hero-stroke-blue {
+  --rotation: 1.4deg;
+  top: 0.95rem;
+  left: 2rem;
+  width: 76%;
+  transform: rotate(1.4deg) scaleX(0);
   animation-delay: 0.22s;
 }
 
 .hero-summary {
   margin: 1.25rem 0 0;
   max-width: 34rem;
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   line-height: 1.8;
   color: #343b49;
 }
@@ -243,10 +231,11 @@
   position: absolute;
   left: 0;
   top: 0.72rem;
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.55rem;
+  height: 0.18rem;
   border-radius: 999px;
   background: rgba(92, 124, 177, 0.72);
+  transform: rotate(-10deg);
 }
 
 .portrait-card {
@@ -258,9 +247,9 @@
   padding: 1.15rem;
   border-radius: 2rem;
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(243, 246, 252, 0.94));
+    linear-gradient(160deg, rgba(255, 255, 255, 0.93), rgba(242, 247, 255, 0.98));
   box-shadow:
-    0 28px 50px rgba(48, 59, 86, 0.1),
+    0 28px 50px rgba(48, 59, 86, 0.08),
     inset 0 0 0 1px rgba(89, 98, 118, 0.08);
   transform: rotate(2deg);
 }
@@ -350,12 +339,6 @@
   filter: drop-shadow(0 10px 18px rgba(79, 60, 44, 0.12));
 }
 
-.tape-strip-copy {
-  top: -1.3rem;
-  right: 1.1rem;
-  transform: rotate(8deg);
-}
-
 .tape-strip-portrait {
   top: -1.1rem;
   left: 50%;
@@ -385,7 +368,7 @@
 .content-card {
   padding: 1.6rem;
   border-radius: 1.5rem;
-  background: rgba(255, 255, 252, 0.58);
+  background: rgba(255, 255, 254, 0.68);
   border: 1px solid rgba(92, 102, 121, 0.1);
   box-shadow: 0 18px 40px rgba(57, 69, 96, 0.07);
   backdrop-filter: blur(8px);
@@ -408,7 +391,7 @@
   font-size: 0.82rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9b5c42;
+  color: #b24f56;
 }
 
 .section-about {
@@ -630,12 +613,12 @@
     font-size: 1.08rem;
   }
 
-  .portrait-paper {
-    transform: none;
+  .hero-copy {
+    padding-left: 0;
   }
 
-  .tape-strip-copy {
-    right: 0.4rem;
+  .portrait-paper {
+    transform: none;
   }
 
   .portrait-frame {
