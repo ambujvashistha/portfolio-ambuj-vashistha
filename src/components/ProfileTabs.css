@@ -1,0 +1,148 @@
+.profile-tabs {
+  display: flex;
+  gap: 0.55rem;
+  margin: 0 auto 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.95rem 0.55rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 254, 0.78);
+  border: 1px solid rgba(95, 105, 124, 0.16);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.profile-tab:hover {
+  border-color: var(--tab-accent, rgba(63, 126, 241, 0.4));
+  transform: translateY(-2px);
+}
+
+.profile-tab-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  color: var(--tab-accent, #11151d);
+}
+
+.profile-tab-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-tab-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.18rem;
+}
+
+.profile-tab-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e2430;
+}
+
+.profile-tab-handle {
+  font-size: 0.7rem;
+  color: rgba(40, 45, 58, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.profile-tab-preview {
+  position: absolute;
+  bottom: calc(100% + 0.7rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22rem;
+  border-radius: 0.85rem;
+  background: #11151d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(20, 25, 38, 0.32);
+  overflow: hidden;
+  z-index: 30;
+  pointer-events: none;
+  display: block;
+}
+
+.profile-tab-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.profile-tab-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.profile-tab-preview-url {
+  margin-left: 0.45rem;
+  font-size: 0.7rem;
+  color: rgba(231, 236, 245, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-tab-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #1e2430;
+}
+
+.profile-tab-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 2.5rem 1rem;
+  color: #fffaf3;
+  text-align: center;
+}
+
+.profile-tab-placeholder-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.profile-tab-placeholder-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-tab-placeholder-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fffaf3;
+}
+
+.profile-tab-placeholder-handle {
+  font-size: 0.78rem;
+  color: rgba(255, 250, 243, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (max-width: 720px) {
+  .profile-tab-preview {
+    display: none;
+  }
+}

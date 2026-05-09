@@ -1,0 +1,153 @@
+.gh-activity {
+  margin: 0.8rem auto;
+  padding: 1.6rem 1.8rem 1.4rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 254, 0.72);
+  border: 1px solid rgba(95, 105, 124, 0.12);
+  backdrop-filter: blur(8px);
+  display: inline-grid;
+  gap: 0.9rem;
+  justify-self: center;
+  max-width: 100%;
+}
+
+.gh-activity-wrap {
+  display: grid;
+  justify-content: center;
+}
+
+.gh-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(40, 45, 58, 0.55);
+}
+
+.gh-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed rgba(95, 105, 124, 0.18);
+}
+
+.gh-card-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #11151d, #1e2430);
+  color: #fffaf3;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.gh-card-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.gh-card-handle {
+  margin: 0.18rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e2430;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.gh-chart {
+  display: grid;
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+
+.gh-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 0.85rem;
+  gap: 0.18rem;
+  padding-left: 0.1rem;
+  font-size: 0.72rem;
+  color: rgba(40, 45, 58, 0.6);
+  min-width: max-content;
+}
+
+.gh-month-label {
+  white-space: nowrap;
+}
+
+.gh-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 0.85rem;
+  gap: 0.18rem;
+  min-width: max-content;
+}
+
+.gh-col {
+  display: grid;
+  grid-template-rows: repeat(7, 0.85rem);
+  gap: 0.18rem;
+}
+
+.gh-cell {
+  display: block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.18rem;
+  background: #ebedf0;
+  border: 1px solid rgba(27, 31, 35, 0.04);
+}
+
+.gh-empty {
+  background: transparent;
+  border-color: transparent;
+}
+
+.gh-level-0 { background: #ebedf0; }
+.gh-level-1 { background: #9be9a8; }
+.gh-level-2 { background: #40c463; }
+.gh-level-3 { background: #30a14e; }
+.gh-level-4 { background: #216e39; }
+
+.gh-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: rgba(40, 45, 58, 0.7);
+}
+
+.gh-total {
+  color: rgba(40, 45, 58, 0.78);
+}
+
+.gh-username {
+  font-weight: 600;
+  color: rgba(63, 126, 241, 0.95);
+  text-decoration: none;
+}
+
+.gh-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.gh-legend .gh-cell {
+  width: 0.72rem;
+  height: 0.72rem;
+}
+
+@media (max-width: 720px) {
+  .gh-activity {
+    padding: 1.2rem 1rem 1rem;
+  }
+  .gh-footer {
+    justify-content: center;
+  }
+}
