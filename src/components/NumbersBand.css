@@ -1,0 +1,70 @@
+.numbers-band {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  margin: 0.6rem 0;
+  padding: 1.2rem 0.4rem;
+  border-top: 1px solid rgba(95, 105, 124, 0.16);
+  border-bottom: 1px solid rgba(95, 105, 124, 0.16);
+}
+
+.numbers-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  padding: 0 1rem;
+  border-right: 1px dashed rgba(95, 105, 124, 0.18);
+}
+
+.numbers-item:last-child {
+  border-right: none;
+}
+
+.numbers-value {
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #11151d;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.numbers-suffix {
+  color: rgba(63, 126, 241, 0.95);
+  margin-left: 0.05em;
+}
+
+.numbers-label {
+  margin: 0.4rem 0 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(40, 45, 58, 0.62);
+}
+
+.numbers-sub {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(40, 45, 58, 0.55);
+}
+
+@media (max-width: 880px) {
+  .numbers-band {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 0;
+  }
+  .numbers-item:nth-child(3) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .numbers-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .numbers-item:nth-child(2),
+  .numbers-item:nth-child(4) {
+    border-right: none;
+  }
+}

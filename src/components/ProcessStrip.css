@@ -1,0 +1,74 @@
+.process-strip {
+  margin: 0.8rem 0;
+}
+
+.process-eyebrow {
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(40, 45, 58, 0.55);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.process-step {
+  position: relative;
+  padding: 1.2rem 1.2rem 1.3rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 254, 0.62);
+  border: 1px solid rgba(95, 105, 124, 0.12);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover {
+  border-color: rgba(63, 126, 241, 0.28);
+  box-shadow: 0 18px 40px rgba(48, 59, 86, 0.06);
+}
+
+.process-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f05f58, #d93d53);
+  color: #fffaf3;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.7rem;
+}
+
+.process-step h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #11151d;
+}
+
+.process-step p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(40, 45, 58, 0.75);
+}
+
+@media (max-width: 880px) {
+  .process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}

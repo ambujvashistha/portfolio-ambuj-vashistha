@@ -1,0 +1,133 @@
+.term-trigger {
+  position: fixed;
+  bottom: 1.4rem;
+  left: 5.4rem;
+  z-index: 60;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 254, 0.82);
+  color: rgba(40, 45, 58, 0.78);
+  border: 1px solid rgba(95, 105, 124, 0.2);
+  backdrop-filter: blur(8px);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(48, 59, 86, 0.1);
+  display: grid;
+  place-items: center;
+}
+
+.term-trigger:hover {
+  color: #1e2430;
+  border-color: rgba(63, 126, 241, 0.4);
+}
+
+.term-trigger-prompt {
+  letter-spacing: -0.05em;
+}
+
+.term-window {
+  position: fixed;
+  bottom: 5rem;
+  left: 1.4rem;
+  z-index: 90;
+  width: min(28rem, calc(100vw - 2.8rem));
+  height: 22rem;
+  border-radius: 1rem;
+  background: rgba(11, 14, 22, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(20, 25, 38, 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #e7ecf5;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.term-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.term-dot-red { background: #ff605c; }
+.term-dot-amber { background: #ffbd44; }
+.term-dot-green { background: #00ca4e; }
+
+.term-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: rgba(231, 236, 245, 0.55);
+}
+
+.term-body {
+  flex: 1;
+  padding: 0.85rem 1rem 1rem;
+  overflow-y: auto;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.term-line {
+  display: flex;
+  gap: 0.5rem;
+  white-space: pre-wrap;
+}
+
+.term-line span {
+  display: block;
+}
+
+.term-error {
+  color: #ff8a92;
+}
+
+.term-prompt-prefix {
+  color: #6df0a3;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.term-prompt-cmd {
+  color: #fffaf3;
+}
+
+.term-input-line {
+  margin-top: 0.2rem;
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fffaf3;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  caret-color: #6df0a3;
+}
+
+.term-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.term-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
