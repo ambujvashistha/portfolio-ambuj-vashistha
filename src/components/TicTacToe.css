@@ -1,13 +1,104 @@
+.ttt-fab {
+  position: fixed;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.05rem 0.7rem 0.85rem;
+  border: 1px solid rgba(95, 105, 124, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fffaf3, #f1f5ff);
+  color: #1e222c;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow:
+    0 18px 30px rgba(48, 59, 86, 0.16),
+    0 2px 6px rgba(48, 59, 86, 0.08);
+}
+
+.ttt-fab-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f05f58, #d93d53);
+  color: #fffaf3;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.ttt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.ttt-modal {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.4rem;
+  width: 21rem;
+  height: 26rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-radius: 1.4rem;
+  background: linear-gradient(160deg, #fffaf3 0%, #f1f6ff 100%);
+  border: 1px solid rgba(95, 105, 124, 0.16);
+  box-shadow: 0 30px 60px rgba(20, 25, 38, 0.22), 0 4px 10px rgba(20, 25, 38, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .ttt-modal {
+    width: calc(100vw - 2rem);
+    right: 1rem;
+    bottom: 5rem;
+  }
+}
+
+.ttt-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: rgba(40, 45, 58, 0.6);
+  cursor: pointer;
+}
+
+.ttt-close:hover {
+  color: #1e222c;
+}
+
 .ttt-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2rem 2rem;
-  margin: 2rem auto;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
   width: 100%;
-  max-width: 45rem;
-  opacity: 1; /* ensure it's not hidden by mistake */
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  height: 100%;
+  opacity: 1;
+}
+
+.ttt-stage {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
 }
 
 .ttt-container.in-view {
@@ -16,8 +107,8 @@
 }
 
 .ttt-title {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  margin: 0 0 0.4rem;
   color: #1e222c;
   text-align: center;
 }
@@ -53,21 +144,26 @@
 
 .ttt-game {
   width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .ttt-status {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  margin: 0;
+  height: 1.4rem;
+  font-size: 1rem;
   color: rgba(63, 126, 241, 0.9);
 }
 
 .ttt-board {
   position: relative;
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
 }
 
 .ttt-grid-svg {
@@ -127,7 +223,7 @@
 }
 
 .ttt-mark {
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 1;
   color: #111;
   animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -158,8 +254,19 @@
 }
 
 .ttt-reset {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  padding: 0.35rem 1rem;
+}
+
+.ttt-chooser {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 @media (max-width: 720px) {
