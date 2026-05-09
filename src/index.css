@@ -28,6 +28,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     linear-gradient(rgba(113, 132, 181, 0.13) 1px, transparent 1px),
     linear-gradient(90deg, rgba(113, 132, 181, 0.13) 1px, transparent 1px),
@@ -46,4 +47,38 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px dashed rgba(63, 126, 241, 0.85);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.inline-link {
+  color: rgba(63, 126, 241, 0.95);
+  text-decoration: none;
+  font-weight: 600;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 90%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.2px;
+  padding-bottom: 1px;
+  transition: background-size 0.25s ease;
+}
+
+.inline-link:hover {
+  background-size: 100% 1.2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
