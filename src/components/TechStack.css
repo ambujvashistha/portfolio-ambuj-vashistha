@@ -1,0 +1,101 @@
+.tech-stack {
+  margin: 1rem 0 0;
+  padding: 1rem 1.05rem 1.1rem;
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(63, 126, 241, 0.06), transparent 38%),
+    radial-gradient(circle at 100% 100%, rgba(217, 73, 89, 0.06), transparent 38%),
+    rgba(247, 244, 238, 0.78);
+  color: #1e2430;
+  border: 1px solid rgba(95, 105, 124, 0.18);
+  box-shadow: 0 16px 32px rgba(48, 59, 86, 0.06);
+}
+
+.tech-stack-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+}
+
+.tech-stack-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(40, 45, 58, 0.55);
+}
+
+.tech-stack-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(40, 45, 58, 0.18), transparent);
+}
+
+.tech-stack-meta {
+  font-size: 0.7rem;
+  color: rgba(40, 45, 58, 0.5);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.04em;
+}
+
+.tech-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  align-items: start;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  border-top: 1px dashed rgba(95, 105, 124, 0.2);
+}
+
+.tech-row:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.tech-row-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(40, 45, 58, 0.55);
+  padding-top: 0.28rem;
+}
+
+.tech-row-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  background: rgba(255, 255, 254, 0.78);
+  border: 1px solid rgba(95, 105, 124, 0.2);
+  color: rgba(35, 39, 48, 0.9);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  cursor: default;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.tech-chip:hover {
+  background: linear-gradient(135deg, rgba(63, 126, 241, 0.14), rgba(217, 73, 89, 0.12));
+  border-color: rgba(63, 126, 241, 0.35);
+  color: #1e2430;
+}
+
+@media (max-width: 540px) {
+  .tech-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .tech-row-label {
+    padding-top: 0;
+  }
+}
