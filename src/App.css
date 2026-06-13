@@ -274,7 +274,7 @@ body.theme-lab .paper-grain {
 }
 
 .handwritten-line {
-  font-family: "Bradley Hand", "Segoe Print", "Snell Roundhand", cursive;
+  font-family: var(--font-hand);
   font-size: 1.5rem;
   line-height: 1.1;
   letter-spacing: 0.02em;
@@ -287,7 +287,10 @@ body.theme-lab .paper-grain {
   display: grid;
   gap: 0.02em;
   min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(3.2rem, 9vw, 7rem);
+  letter-spacing: -0.03em;
   line-height: 0.9;
   color: #11151d;
   text-shadow:
@@ -312,7 +315,7 @@ body.theme-lab .paper-grain {
 
 .hero-name-pencil {
   display: inline-block;
-  font-family: "Bradley Hand", "Segoe Print", "Snell Roundhand", cursive;
+  font-family: var(--font-hand);
   font-weight: 700;
   letter-spacing: 0.01em;
   color: #1e2430;
@@ -606,6 +609,9 @@ body.theme-lab .paper-grain {
 .reel-copy h2 {
   margin: 0;
   max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.025em;
   font-size: clamp(2rem, 4vw, 3.6rem);
   line-height: 0.94;
 }
@@ -800,6 +806,9 @@ body.theme-lab .paper-grain {
 .reel-card h3 {
   margin: 0.4rem 0 0;
   max-width: 12ch;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   line-height: 0.95;
 }
@@ -999,6 +1008,9 @@ body.theme-lab .paper-grain {
 
 .content-card h2 {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: clamp(1.5rem, 2.5vw, 2.3rem);
   line-height: 1.08;
   display: inline;
@@ -1569,4 +1581,38 @@ body.theme-lab .paper-grain {
     background: rgba(255, 255, 254, 0.62);
     border: 1px solid rgba(95, 105, 124, 0.12);
   }
+}
+/* ---- Editor portfolio entry chip (dev nav) ---- */
+.editor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem 0.5rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 21, 29, 0.85);
+  background: linear-gradient(135deg, #1b1f28, #0e1116);
+  color: #f2ede3;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.05;
+  box-shadow: 0 10px 24px rgba(20, 25, 38, 0.18);
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.editor-link:hover { box-shadow: 0 14px 30px rgba(255, 122, 61, 0.3); }
+.editor-link-clap { font-size: 1.05rem; line-height: 1; }
+.editor-link-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.editor-link-sub {
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: #34dccb;
+}
+@media (max-width: 720px) {
+  .editor-link-sub { display: none; }
 }

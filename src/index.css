@@ -1,5 +1,10 @@
 :root {
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Hanken Grotesk", "Segoe UI", sans-serif;
+  --font-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
   color: #1b1f26;
