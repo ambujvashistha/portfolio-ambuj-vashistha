@@ -1,9 +1,12 @@
+import { lazy, Suspense } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import tapeStrip from '../assets/tape-strip.svg'
 import { hero, profile } from '../data/portfolioContent'
 import linkify from '../utils/linkify'
 import Magnetic from './Magnetic'
 import RoughUnderline from './RoughUnderline'
+
+const SketchScene = lazy(() => import('./SketchScene'))
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -134,14 +137,10 @@ export default function HeroSection({ bullets }) {
             decoding="async"
             loading="lazy"
           />
-          <div className="portrait-frame">
-            <div className="portrait-sketch" aria-hidden="true">
-              <span className="sketch halo" />
-              <span className="sketch head" />
-              <span className="sketch jaw" />
-              <span className="sketch shoulder-left" />
-              <span className="sketch shoulder-right" />
-            </div>
+          <div className="portrait-frame portrait-frame-3d">
+            <Suspense fallback={<div className="portrait-frame-loading" />}>
+              <SketchScene />
+            </Suspense>
             <p className="portrait-note">{profile?.name || 'Ambuj Vashistha'}</p>
           </div>
         </div>
