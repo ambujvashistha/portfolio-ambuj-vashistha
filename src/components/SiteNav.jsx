@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import Magnetic from './Magnetic'
 import ResumeViewer from './ResumeViewer'
+import { useNav } from '../nav'
 
 export default function SiteNav({ items }) {
+  const { go } = useNav()
   return (
     <header className="site-nav">
       <a className="brand-mark" href="#top" data-cursor="link">
@@ -27,6 +29,21 @@ export default function SiteNav({ items }) {
       </nav>
 
       <div className="nav-actions">
+        <motion.button
+          type="button"
+          className="editor-link"
+          onClick={() => go('editor')}
+          data-cursor="link"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.96 }}
+          aria-label="Open the video editor portfolio"
+        >
+          <span className="editor-link-clap" aria-hidden="true">🎬</span>
+          <span className="editor-link-text">
+            Editor’s Portfolio
+            <span className="editor-link-sub">flip the page →</span>
+          </span>
+        </motion.button>
         <ResumeViewer />
       </div>
     </header>
