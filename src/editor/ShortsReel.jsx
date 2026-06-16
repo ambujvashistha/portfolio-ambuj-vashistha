@@ -17,11 +17,9 @@ export default function ShortsReel({ videos }) {
   const [active, setActive] = useState(0)
   const [full, setFull] = useState(null)
   const [paused, setPaused] = useState(false)
-  const [muted, setMuted] = useState(true)
   const reduced = useReducedMotion()
 
   const stageRef = useRef(null)
-  const frameRef = useRef(null)
 
   // Drag moves the phone; its tilt is coupled to where it sits, so a fling
   // banks it like a real object. At rest (0,0) it keeps the angled hero pose.
@@ -30,15 +28,13 @@ export default function ShortsReel({ videos }) {
   const rotateY = useSpring(useTransform(x, [-260, 260], [-28, 60]), { stiffness: 120, damping: 14 })
   const rotateX = useSpring(useTransform(y, [-260, 260], [34, -34]), { stiffness: 120, damping: 14 })
 
-  // auto-advance the reel (paused while hovered, dragging, fullscreen, or unmuted)
+  // auto-advance the reel (paused while hovered, dragging, or fullscreen — so you
+  // can use the native YouTube controls without it switching under you)
   useEffect(() => {
-    if (paused || full != null || !muted || shorts.length < 2) return
-    const t = setInterval(() => setActive((a) => (a + 1) % shorts.length), 5000)
+    if (paused || full != null || shorts.length < 2) return
+    const t = setInterval(() => setActive((a) => (a + 1) % shorts.length), 6000)
     return () => clearInterval(t)
-  }, [paused, full, muted, shorts.length])
-
-  // each new short starts muted (its iframe src autostarts muted)
-  useEffect(() => setMuted(true), [active])
+  }, [paused, full, shorts.length])
 
   // lock scroll while fullscreen
   useEffect(() => {
@@ -52,18 +48,6 @@ export default function ShortsReel({ videos }) {
       window.removeEventListener('keydown', onKey)
     }
   }, [full])
-
-  const ytCommand = (func) =>
-    frameRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func, args: [] }),
-      '*',
-    )
-  const toggleMute = (e) => {
-    e.stopPropagation()
-    ytCommand(muted ? 'unMute' : 'mute')
-    setMuted((m) => !m)
-  }
-  const stopDrag = (e) => e.stopPropagation()
 
   if (shorts.length === 0) {
     return (
@@ -93,7 +77,7 @@ export default function ShortsReel({ videos }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          They play right on the phone — grab it, fling it around. Tap 🔊 for sound or ⛶ for fullscreen.
+          They play right on the phone — grab the top bar and fling it around. Hit unmute on the player for sound.
         </motion.p>
       </div>
 
@@ -132,39 +116,24 @@ export default function ShortsReel({ videos }) {
                 >
                   {!reduced && (
                     <iframe
-                      ref={frameRef}
                       className="ed-phone-video"
-                      src={`https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${current.id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                      src={`https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=1&loop=1&playlist=${current.id}&modestbranding=1&rel=0&playsinline=1`}
                       title={current.title}
                       allow="autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
                     />
                   )}
                   <span className="ed-phone-glare" />
-                  <span className="ed-phone-badge">SHORT · {active + 1}/{shorts.length}</span>
-                  {reduced ? (
+                  {/* drag the phone by this top handle; the video below keeps
+                      YouTube's own controls (unmute / volume / fullscreen) live */}
+                  <div className="ed-phone-grab">
+                    <span className="ed-phone-badge">SHORT · {active + 1}/{shorts.length}</span>
+                    <span className="ed-phone-grip" aria-hidden="true" />
+                  </div>
+                  {reduced && (
                     <button className="ed-phone-play" onClick={() => setFull(current.id)} aria-label="Play fullscreen">
                       ▶
                     </button>
-                  ) : (
-                    <>
-                      <button
-                        className="ed-phone-ctl ed-phone-mute"
-                        onClick={toggleMute}
-                        onPointerDownCapture={stopDrag}
-                        aria-pressed={!muted}
-                        aria-label={muted ? 'Unmute' : 'Mute'}
-                      >
-                        {muted ? '🔇' : '🔊'}
-                      </button>
-                      <button
-                        className="ed-phone-ctl ed-phone-fs"
-                        onClick={() => setFull(current.id)}
-                        onPointerDownCapture={stopDrag}
-                        aria-label="Fullscreen"
-                      >
-                        ⛶
-                      </button>
-                    </>
                   )}
                   <p className="ed-phone-caption">{current.title}</p>
                 </motion.div>
