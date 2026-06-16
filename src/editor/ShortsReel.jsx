@@ -117,7 +117,7 @@ export default function ShortsReel({ videos }) {
                   {!reduced && (
                     <iframe
                       className="ed-phone-video"
-                      src={`https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=1&loop=1&playlist=${current.id}&modestbranding=1&rel=0&playsinline=1`}
+                      src={`https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1`}
                       title={current.title}
                       allow="autoplay; encrypted-media; picture-in-picture"
                       allowFullScreen
