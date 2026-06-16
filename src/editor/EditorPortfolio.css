@@ -175,19 +175,6 @@
   background: var(--red); color: #fff; font-size: 1.15rem; padding-left: 3px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
-.ed-monitor-sound {
-  position: absolute; left: 0.8rem; bottom: 0.8rem; z-index: 4;
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  padding: 0.4rem 0.7rem; border: 0; cursor: pointer;
-  border-radius: 999px; color: #fff; font-size: 0.92rem; line-height: 1;
-  background: rgba(17, 21, 29, 0.62); backdrop-filter: blur(6px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-.ed-monitor-sound:hover { background: rgba(224, 123, 24, 0.9); transform: translateY(-1px); }
-.ed-monitor-sound[aria-pressed='true'] { background: rgba(15, 157, 143, 0.85); }
-.ed-monitor-sound-label { font-size: 0.82rem; letter-spacing: 0.01em; }
-@media (max-width: 640px) { .ed-monitor-sound-label { display: none; } }
 .ed-monitor-scan {
   position: absolute; inset: 0; pointer-events: none;
   background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 3px, rgba(0,0,0,0.1) 3px 4px);
@@ -533,6 +520,23 @@
   transition: transform 0.2s ease, background 0.2s ease;
 }
 .ed-phone-play:hover { transform: translate(-50%, -50%) scale(1.08); background: var(--red); }
+.ed-phone-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; z-index: 0; pointer-events: none; /* let drag pass through to the phone */
+  object-fit: cover; background: #06070a;
+}
+.ed-phone-ctl {
+  position: absolute; right: 0.6rem; z-index: 4;
+  width: 2.1rem; height: 2.1rem; border: 0; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; font-size: 0.92rem;
+  color: #fff; background: rgba(8, 10, 14, 0.6); backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.ed-phone-ctl:hover { transform: scale(1.1); background: rgba(224, 123, 24, 0.92); }
+.ed-phone-mute { top: 1.3rem; }
+.ed-phone-mute[aria-pressed='true'] { background: rgba(15, 157, 143, 0.92); }
+.ed-phone-fs { top: 3.7rem; }
 .ed-phone-caption {
   position: relative; z-index: 2; margin: 0; padding: 0.9rem;
   font-size: 0.78rem; line-height: 1.35; color: #fff;

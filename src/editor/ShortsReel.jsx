@@ -5,30 +5,40 @@ import {
   useMotionValue,
   useReducedMotion,
   useSpring,
+  useTransform,
 } from 'framer-motion'
 import RevealText from '../components/RevealText'
 import { SpiderWeb, Pokeball, Lightning } from './Doodles'
 
-/* A draggable 3D phone that plays the channel's shorts, with a fullscreen lightbox. */
+/* A draggable 3D phone that *plays* the channel's shorts inline, fling it around
+   the stage, and tap fullscreen for sound. */
 export default function ShortsReel({ videos }) {
-  const shorts = videos.slice(0, 8)
+  const shorts = videos.filter((v) => v.isShort).slice(0, 8)
   const [active, setActive] = useState(0)
   const [full, setFull] = useState(null)
   const [paused, setPaused] = useState(false)
+  const [muted, setMuted] = useState(true)
   const reduced = useReducedMotion()
 
-  const rx = useMotionValue(-6)
-  const ry = useMotionValue(16)
-  const srx = useSpring(rx, { stiffness: 120, damping: 14 })
-  const sry = useSpring(ry, { stiffness: 120, damping: 14 })
-  const drag = useRef(null)
+  const stageRef = useRef(null)
+  const frameRef = useRef(null)
 
-  // auto-advance the reel
+  // Drag moves the phone; its tilt is coupled to where it sits, so a fling
+  // banks it like a real object. At rest (0,0) it keeps the angled hero pose.
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const rotateY = useSpring(useTransform(x, [-260, 260], [-28, 60]), { stiffness: 120, damping: 14 })
+  const rotateX = useSpring(useTransform(y, [-260, 260], [34, -34]), { stiffness: 120, damping: 14 })
+
+  // auto-advance the reel (paused while hovered, dragging, fullscreen, or unmuted)
   useEffect(() => {
-    if (paused || full != null || shorts.length < 2) return
-    const t = setInterval(() => setActive((a) => (a + 1) % shorts.length), 3800)
+    if (paused || full != null || !muted || shorts.length < 2) return
+    const t = setInterval(() => setActive((a) => (a + 1) % shorts.length), 5000)
     return () => clearInterval(t)
-  }, [paused, full, shorts.length])
+  }, [paused, full, muted, shorts.length])
+
+  // each new short starts muted (its iframe src autostarts muted)
+  useEffect(() => setMuted(true), [active])
 
   // lock scroll while fullscreen
   useEffect(() => {
@@ -43,23 +53,17 @@ export default function ShortsReel({ videos }) {
     }
   }, [full])
 
-  const onDown = (e) => {
-    if (reduced) return
-    drag.current = { x: e.clientX, y: e.clientY, rx: rx.get(), ry: ry.get() }
-    setPaused(true)
-    e.currentTarget.setPointerCapture?.(e.pointerId)
+  const ytCommand = (func) =>
+    frameRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'command', func, args: [] }),
+      '*',
+    )
+  const toggleMute = (e) => {
+    e.stopPropagation()
+    ytCommand(muted ? 'unMute' : 'mute')
+    setMuted((m) => !m)
   }
-  const onMove = (e) => {
-    if (!drag.current) return
-    const dx = e.clientX - drag.current.x
-    const dy = e.clientY - drag.current.y
-    ry.set(clamp(drag.current.ry + dx * 0.45, -55, 55))
-    rx.set(clamp(drag.current.rx - dy * 0.4, -38, 38))
-  }
-  const onUp = () => {
-    drag.current = null
-    setPaused(false)
-  }
+  const stopDrag = (e) => e.stopPropagation()
 
   if (shorts.length === 0) {
     return (
@@ -89,24 +93,27 @@ export default function ShortsReel({ videos }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Spin the phone around. Tap fullscreen to watch the real thing.
+          They play right on the phone — grab it, fling it around. Tap 🔊 for sound or ⛶ for fullscreen.
         </motion.p>
       </div>
 
-      <div className="ed-shorts-stage">
+      <div className="ed-shorts-stage" ref={stageRef}>
         <motion.div
           className="ed-phone"
-          style={{ rotateX: srx, rotateY: sry }}
-          onPointerDown={onDown}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerLeave={onUp}
+          drag={!reduced}
+          dragConstraints={stageRef}
+          dragElastic={0.16}
+          dragMomentum
+          whileDrag={{ scale: 1.03, cursor: 'grabbing' }}
+          style={reduced ? undefined : { x, y, rotateX, rotateY }}
+          onDragStart={() => setPaused(true)}
+          onDragEnd={() => setPaused(false)}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          initial={{ opacity: 0, y: 40, rotateY: 60 }}
-          whileInView={{ opacity: 1, y: 0, rotateY: 16 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ type: 'spring', stiffness: 70, damping: 16 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 16 }}
         >
           <div className={`ed-phone-float ${reduced ? 'is-still' : ''}`}>
             <div className="ed-phone-body">
@@ -123,11 +130,42 @@ export default function ShortsReel({ videos }) {
                   exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.5 }}
                 >
+                  {!reduced && (
+                    <iframe
+                      ref={frameRef}
+                      className="ed-phone-video"
+                      src={`https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${current.id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                      title={current.title}
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                    />
+                  )}
                   <span className="ed-phone-glare" />
                   <span className="ed-phone-badge">SHORT · {active + 1}/{shorts.length}</span>
-                  <button className="ed-phone-play" onClick={() => setFull(current.id)} aria-label="Play fullscreen">
-                    ▶
-                  </button>
+                  {reduced ? (
+                    <button className="ed-phone-play" onClick={() => setFull(current.id)} aria-label="Play fullscreen">
+                      ▶
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        className="ed-phone-ctl ed-phone-mute"
+                        onClick={toggleMute}
+                        onPointerDownCapture={stopDrag}
+                        aria-pressed={!muted}
+                        aria-label={muted ? 'Unmute' : 'Mute'}
+                      >
+                        {muted ? '🔇' : '🔊'}
+                      </button>
+                      <button
+                        className="ed-phone-ctl ed-phone-fs"
+                        onClick={() => setFull(current.id)}
+                        onPointerDownCapture={stopDrag}
+                        aria-label="Fullscreen"
+                      >
+                        ⛶
+                      </button>
+                    </>
+                  )}
                   <p className="ed-phone-caption">{current.title}</p>
                 </motion.div>
               </AnimatePresence>
@@ -135,7 +173,7 @@ export default function ShortsReel({ videos }) {
           </div>
         </motion.div>
 
-        <p className="ed-shorts-hint handwritten-line">grab + spin me ↺</p>
+        <p className="ed-shorts-hint handwritten-line">grab + fling me ✦</p>
       </div>
 
       <div className="ed-shorts-controls">
@@ -199,8 +237,4 @@ export default function ShortsReel({ videos }) {
       </AnimatePresence>
     </section>
   )
-}
-
-function clamp(v, a, b) {
-  return Math.max(a, Math.min(b, v))
 }

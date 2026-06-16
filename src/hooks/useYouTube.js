@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const API_KEY = import.meta.env.VITE_YT_API_KEY
 const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID || 'UCGIxGFeB6jbl5CEDqyU2axg'
-const CACHE_KEY = `yt-cache-v3-${CHANNEL_ID}`
+const CACHE_KEY = `yt-cache-v4-${CHANNEL_ID}`
 const TTL = 1000 * 60 * 30 // 30 min
 
 // Shown if the API key is missing or quota is exhausted, so the UI never reads empty.
@@ -128,13 +128,14 @@ export default function useYouTube() {
                 const it = byId[v.id]
                 if (!it) return v
                 const dur = parseDuration(it.contentDetails?.duration)
-                // A real Short is *vertical*, not merely short. Read the true
-                // aspect ratio from the player embed dimensions; fall back to the
-                // old duration guess only when the embed size is unavailable.
+                // A Short is *not landscape* — vertical or 1:1 (square edits
+                // count). YouTube's API has no short/video type flag, so read the
+                // true aspect ratio from the player embed dimensions; fall back to
+                // the duration guess only when the embed size is unavailable.
                 const w = Number(it.player?.embedHtml?.match(/width="(\d+)"/)?.[1]) || 0
                 const h = Number(it.player?.embedHtml?.match(/height="(\d+)"/)?.[1]) || 0
                 const tagged = /#shorts?\b/i.test(`${v.title} ${v.description}`)
-                const isShort = tagged || (w > 0 && h > 0 ? h > w : dur > 0 && dur <= 60)
+                const isShort = tagged || (w > 0 && h > 0 ? h >= w : dur > 0 && dur <= 60)
                 return {
                   ...v,
                   views: Number(it.statistics?.viewCount) || null,

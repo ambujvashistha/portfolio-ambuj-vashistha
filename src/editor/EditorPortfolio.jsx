@@ -97,21 +97,8 @@ function EditorNav() {
 /* ---------- hero ---------- */
 function Hero({ channel, featured }) {
   const [playing, setPlaying] = useState(false)
-  const [muted, setMuted] = useState(true)
-  const playerRef = useRef(null)
   const reduced = useReducedMotion()
   const id = featured?.id
-
-  // Talk to the YouTube embed through its postMessage API (enablejsapi=1).
-  const toggleSound = () => {
-    const win = playerRef.current?.contentWindow
-    if (!win) return
-    win.postMessage(
-      JSON.stringify({ event: 'command', func: muted ? 'unMute' : 'mute', args: [] }),
-      '*',
-    )
-    setMuted((m) => !m)
-  }
   const tiltX = useMotionValue(0)
   const tiltY = useMotionValue(0)
   const rotateX = useSpring(useTransform(tiltY, [-0.5, 0.5], [8, -8]), { stiffness: 200, damping: 18 })
@@ -193,27 +180,14 @@ function Hero({ channel, featured }) {
           style={featured ? { backgroundImage: `url(${featured.image})` } : undefined}
         >
           {id && (playing || !reduced) ? (
-            <>
-              <iframe
-                ref={playerRef}
-                className="ed-monitor-video"
-                src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
-                title={featured?.title || 'Featured edit'}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              />
-              <button
-                type="button"
-                className="ed-monitor-sound"
-                onClick={toggleSound}
-                aria-pressed={!muted}
-                aria-label={muted ? 'Unmute' : 'Mute'}
-              >
-                <span aria-hidden="true">{muted ? '🔇' : '🔊'}</span>
-                <span className="ed-monitor-sound-label">{muted ? 'tap for sound' : 'sound on'}</span>
-              </button>
-            </>
+            <iframe
+              className="ed-monitor-video"
+              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&modestbranding=1&rel=0&playsinline=1`}
+              title={featured?.title || 'Featured edit'}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            />
           ) : featured ? (
             <button className="ed-monitor-poster" onClick={() => setPlaying(true)}>
               <span className="ed-play">▶</span>
