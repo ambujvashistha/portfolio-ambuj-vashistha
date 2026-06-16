@@ -175,6 +175,19 @@
   background: var(--red); color: #fff; font-size: 1.15rem; padding-left: 3px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
+.ed-monitor-sound {
+  position: absolute; left: 0.8rem; bottom: 0.8rem; z-index: 4;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.4rem 0.7rem; border: 0; cursor: pointer;
+  border-radius: 999px; color: #fff; font-size: 0.92rem; line-height: 1;
+  background: rgba(17, 21, 29, 0.62); backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.ed-monitor-sound:hover { background: rgba(224, 123, 24, 0.9); transform: translateY(-1px); }
+.ed-monitor-sound[aria-pressed='true'] { background: rgba(15, 157, 143, 0.85); }
+.ed-monitor-sound-label { font-size: 0.82rem; letter-spacing: 0.01em; }
+@media (max-width: 640px) { .ed-monitor-sound-label { display: none; } }
 .ed-monitor-scan {
   position: absolute; inset: 0; pointer-events: none;
   background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 3px, rgba(0,0,0,0.1) 3px 4px);

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const API_KEY = import.meta.env.VITE_YT_API_KEY
 const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID || 'UCGIxGFeB6jbl5CEDqyU2axg'
-const CACHE_KEY = `yt-cache-v2-${CHANNEL_ID}`
+const CACHE_KEY = `yt-cache-v3-${CHANNEL_ID}`
 const TTL = 1000 * 60 * 30 // 30 min
 
 // Shown if the API key is missing or quota is exhausted, so the UI never reads empty.
@@ -118,7 +118,7 @@ export default function useYouTube() {
           const ids = videos.map((v) => v.id).join(',')
           if (ids) {
             const sRes = await fetch(
-              `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${ids}&key=${API_KEY}`,
+              `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails,player&id=${ids}&maxHeight=480&key=${API_KEY}`,
             )
             const sd = await sRes.json()
             if (!cancelled && !sd.error) {
@@ -128,13 +128,19 @@ export default function useYouTube() {
                 const it = byId[v.id]
                 if (!it) return v
                 const dur = parseDuration(it.contentDetails?.duration)
-                const isShort = dur > 0 && dur <= 60
+                // A real Short is *vertical*, not merely short. Read the true
+                // aspect ratio from the player embed dimensions; fall back to the
+                // old duration guess only when the embed size is unavailable.
+                const w = Number(it.player?.embedHtml?.match(/width="(\d+)"/)?.[1]) || 0
+                const h = Number(it.player?.embedHtml?.match(/height="(\d+)"/)?.[1]) || 0
+                const tagged = /#shorts?\b/i.test(`${v.title} ${v.description}`)
+                const isShort = tagged || (w > 0 && h > 0 ? h > w : dur > 0 && dur <= 60)
                 return {
                   ...v,
                   views: Number(it.statistics?.viewCount) || null,
                   likes: Number(it.statistics?.likeCount) || null,
                   durationSec: dur,
-                  isShort: isShort || /#shorts?/i.test(v.title),
+                  isShort,
                 }
               })
             }
