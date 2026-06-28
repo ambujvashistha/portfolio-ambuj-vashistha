@@ -76,7 +76,7 @@ const defaults = {
     youtube: '@ambujvashistha',
     location: 'Pune, India',
     school: 'B.Tech AI/ML — Newton School of Technology (ADYPU)',
-    gpa: '8.98 / 10.0',
+    gpa: '9.02 / 10.0',
     cohort: '2024 – 2028',
     calendly: 'https://calendly.com/ambujva123/30min',
   },
