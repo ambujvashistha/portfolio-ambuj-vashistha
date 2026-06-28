@@ -123,11 +123,11 @@ const defaults = {
   ],
 
   numbers: [
-    { value: 250, suffix: '+', label: 'DSA solved', sub: 'LeetCode + Codeforces' },
+    { value: 275, suffix: '+', label: 'DSA solved', sub: 'LeetCode + Codeforces' },
     { value: 941, suffix: '', label: 'CF max rating', sub: 'Codeforces peak' },
-    { value: 8.98, suffix: '/10', label: 'GPA', sub: 'B.Tech AI/ML, ADYPU' },
+    { value: 9.02, suffix: '/10', label: 'GPA', sub: 'B.Tech AI/ML, ADYPU' },
     { value: null, suffix: '+', label: 'GitHub contribs', sub: 'last 12 months', live: 'github' },
-    { value: 37, suffix: 'K+', label: 'YouTube views', sub: '250+ watch hours' },
+    { value: 40, suffix: 'K+', label: 'YouTube views', sub: '250+ watch hours' },
     { value: 100, suffix: '+', label: 'listings unified', sub: 'Job Sync aggregator' },
   ],
 
